@@ -21,10 +21,11 @@ export const RomanticEnvelope: React.FC<RomanticEnvelopeProps> = ({
     setIsOpening(true);
     playPaperSound();
 
-    // Bulletproof direct DOM play to keep the user gesture token
-    const bgMusic = document.getElementById('bg-music-player') as HTMLAudioElement | null;
-    if (bgMusic) {
-      bgMusic.play().catch(e => console.log('Autoplay blocked:', e));
+    // Trigger audio playback event for browser autoplay policies
+    if (typeof (window as any).playBackgroundMusic === 'function') {
+      (window as any).playBackgroundMusic();
+    } else {
+      window.dispatchEvent(new Event('user-interacted-play-audio'));
     }
 
     // Heart and sparkle confetti burst

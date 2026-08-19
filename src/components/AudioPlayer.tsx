@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause } from 'lucide-react';
-import audioTrack from '../assets/descendants.mp3';
+import audioTrack from '../assets/for_once_in_my_life.mp3';
 
 export const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -11,6 +11,22 @@ export const AudioPlayer: React.FC = () => {
       audioRef.current.volume = 1.0;
       audioRef.current.loop = true;
     }
+
+    // Global function to trigger play directly from other components
+    const handleAutoPlay = () => {
+      if (audioRef.current) {
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(e => console.log('Autoplay blocked:', e));
+      }
+    };
+
+    window.addEventListener('user-interacted-play-audio', handleAutoPlay);
+    (window as any).playBackgroundMusic = handleAutoPlay;
+
+    return () => {
+      window.removeEventListener('user-interacted-play-audio', handleAutoPlay);
+    };
   }, []);
 
   const handleToggle = (e: React.MouseEvent) => {
