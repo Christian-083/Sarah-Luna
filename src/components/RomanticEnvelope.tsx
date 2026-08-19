@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, Sparkles, Mail } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { playPaperSound } from '../utils/sounds';
 
 interface RomanticEnvelopeProps {
   onOpen: () => void;
@@ -18,6 +19,7 @@ export const RomanticEnvelope: React.FC<RomanticEnvelopeProps> = ({
   const handleEnvelopeClick = () => {
     if (isOpening) return;
     setIsOpening(true);
+    playPaperSound();
 
     // Trigger audio playback event for browser autoplay policies (synchronous for direct gesture)
     if (typeof (window as any).playBackgroundMusic === 'function') {
