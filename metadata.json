@@ -1,0 +1,6 @@
+{
+  "name": "Conquistei Você? 💕",
+  "description": "Um site romântico interativo em tom rosa clean, com corações caindo, botão fujão e declaração de amor em 5 mensagens com fotos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

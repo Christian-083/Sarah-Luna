@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 12px 40px 0 rgba(255, 182, 193, 0.35);
+  }
+}
+
+.heart-float {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #ff8fa3;
+  transform: rotate(-45deg);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.heart-float:before,
+.heart-float:after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #ff8fa3;
+  border-radius: 50%;
+}
+
+.heart-float:before {
+  top: -11px;
+  left: 0;
+}
+
+.heart-float:after {
+  left: 11px;
+  top: 0;
+}
+
+@keyframes floatSway {
+  0%, 100% {
+    transform: rotate(-45deg) translateY(0px) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) translateY(-15px) scale(1.08);
+  }
+}
+
+.animate-float {
+  animation: floatSway 6s ease-in-out infinite;
+}
