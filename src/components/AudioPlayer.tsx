@@ -11,22 +11,6 @@ export const AudioPlayer: React.FC = () => {
       audioRef.current.volume = 1.0;
       audioRef.current.loop = true;
     }
-
-    // Direct synchronous call for components that trigger it
-    const handleAutoPlay = () => {
-      if (audioRef.current) {
-        audioRef.current.play()
-          .then(() => setIsPlaying(true))
-          .catch(e => console.log('Autoplay blocked:', e));
-      }
-    };
-
-    window.addEventListener('user-interacted-play-audio', handleAutoPlay);
-    (window as any).playBackgroundMusic = handleAutoPlay;
-
-    return () => {
-      window.removeEventListener('user-interacted-play-audio', handleAutoPlay);
-    };
   }, []);
 
   const handleToggle = (e: React.MouseEvent) => {
@@ -46,6 +30,7 @@ export const AudioPlayer: React.FC = () => {
   return (
     <>
       <audio
+        id="bg-music-player"
         ref={audioRef}
         src={audioTrack}
         playsInline

@@ -84,10 +84,9 @@ export const RomanticMessages: React.FC<RomanticMessagesProps> = ({
 
             <button
               onClick={() => {
-                if (typeof (window as any).playBackgroundMusic === 'function') {
-                  (window as any).playBackgroundMusic();
-                } else {
-                  window.dispatchEvent(new Event('user-interacted-play-audio'));
+                const bgMusic = document.getElementById('bg-music-player') as HTMLAudioElement | null;
+                if (bgMusic) {
+                  bgMusic.play().catch(e => console.log('Autoplay blocked:', e));
                 }
                 setShowIntro(false);
               }}
