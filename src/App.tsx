@@ -91,7 +91,7 @@ export default function App() {
       <div className="heart-float animate-float bottom-20 left-16" style={{ animationDelay: '4s' }} />
 
       {/* Minimalist Top Floating Audio Player */}
-      <AudioPlayer playVictorySound={activeModal === 'sim' || savedVote === 'sim'} />
+      <AudioPlayer />
 
       {/* Falling Hearts Particle Canvas */}
       <FallingHearts density={40} />

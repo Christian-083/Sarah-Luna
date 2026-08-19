@@ -1,4 +1,6 @@
 // src/utils/sounds.ts
+import bgMusicFile from '../assets/descendants.mp3';
+
 let audioCtx: AudioContext | null = null;
 
 const getContext = () => {
@@ -11,6 +13,52 @@ const getContext = () => {
   return audioCtx;
 };
 
+// --- Background Music Manager ---
+let bgAudioInstance: HTMLAudioElement | null = null;
+
+export const initBackgroundMusic = () => {
+  if (!bgAudioInstance) {
+    bgAudioInstance = new Audio(bgMusicFile);
+    bgAudioInstance.loop = true;
+    bgAudioInstance.volume = 1.0;
+  }
+  return bgAudioInstance;
+};
+
+export const playBackgroundMusic = async () => {
+  try {
+    const audio = initBackgroundMusic();
+    await audio.play();
+    return true;
+  } catch (e) {
+    console.warn('Autoplay prevented or audio error:', e);
+    return false;
+  }
+};
+
+export const pauseBackgroundMusic = () => {
+  if (bgAudioInstance) {
+    bgAudioInstance.pause();
+  }
+};
+
+export const toggleBackgroundMusic = async () => {
+  try {
+    const audio = initBackgroundMusic();
+    if (audio.paused) {
+      await audio.play();
+      return true;
+    } else {
+      audio.pause();
+      return false;
+    }
+  } catch (e) {
+    console.warn('Audio toggle failed:', e);
+    return false;
+  }
+};
+
+// --- Sound Effects ---
 export const playClickSound = () => {
   try {
     const ctx = getContext();
