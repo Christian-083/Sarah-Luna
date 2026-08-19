@@ -61,12 +61,6 @@ function parseDevice(userAgent: string = ''): string {
 }
 
 // API Routes
-app.get(['/descendants.mp3', '/for_once_in_my_life.mp3', '/wonderland.mp3', '/music_track.mp3', '/api/music'], (req, res) => {
-  const filePath = path.join(process.cwd(), 'public', 'descendants.mp3');
-  res.setHeader('Content-Type', 'audio/mpeg');
-  res.setHeader('Accept-Ranges', 'bytes');
-  res.sendFile(filePath);
-});
 
 app.get('/api/votes', (req, res) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');

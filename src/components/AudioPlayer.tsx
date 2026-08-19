@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Play, Pause, Music } from 'lucide-react';
+import audioTrack from '../assets/descendants.mp3';
 
 interface AudioPlayerProps {
   playVictorySound?: boolean;
@@ -33,7 +34,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
     <>
       <audio
         ref={audioRef}
-        src="/descendants.mp3"
+        src={audioTrack}
         playsInline
         loop
         preload="auto"
@@ -41,7 +42,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = () => {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       >
-        <source src="/descendants.mp3" type="audio/mpeg" />
+        <source src={audioTrack} type="audio/mpeg" />
       </audio>
 
       <div className="fixed top-4 right-4 z-[9999] pointer-events-auto animate-fade-in">
